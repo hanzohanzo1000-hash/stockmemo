@@ -1,76 +1,9 @@
 import { WaitlistForm } from "@/components/waitlist-form";
-
-const features = [
-  {
-    title: "Earnings summaries",
-    description:
-      "Every report distilled to what moved the stock — revenue, guidance, and surprises in plain language.",
-  },
-  {
-    title: "Bull vs Bear analysis",
-    description:
-      "See both sides before you decide. Structured arguments for and against, not noise.",
-  },
-  {
-    title: "Key metrics tracking",
-    description:
-      "Track the numbers that matter across quarters. Margins, growth, and guidance at a glance.",
-  },
-  {
-    title: "AI investment memos",
-    description:
-      "Generate concise memos you can save, share, or revisit when the next quarter drops.",
-  },
-];
-
-const valueProps = [
-  {
-    stat: "12+ hrs",
-    label: "Save hours every earnings season",
-    detail: "Skip the transcript grind. Get the signal in one pass.",
-  },
-  {
-    stat: "60 sec",
-    label: "Read less. Understand more.",
-    detail: "Dense filings, distilled to what actually moves the thesis.",
-  },
-  {
-    stat: "100%",
-    label: "Built for conviction",
-    detail: "Structured output you can act on — not another news feed.",
-  },
-];
-
-const testimonials = [
-  {
-    quote:
-      "I used to block two hours per name on earnings night. StockMemo cuts that to minutes without losing depth.",
-    role: "Portfolio Manager",
-    firm: "Multi-strategy fund",
-  },
-  {
-    quote:
-      "The bull/bear framing alone is worth it. I finally have a consistent way to pressure-test my view.",
-    role: "Independent investor",
-    firm: "14-year market participant",
-  },
-  {
-    quote:
-      "Clean, fast, institutional-grade. This is what earnings workflow should feel like in 2026.",
-    role: "Research Analyst",
-    firm: "Long/short equity desk",
-  },
-];
-
-const trustedBy = [
-  "Family offices",
-  "Buy-side analysts",
-  "Independent PMs",
-  "Research teams",
-  "Retail allocators",
-];
+import { ja } from "@/lib/i18n/ja";
 
 export default function Home() {
+  const t = ja.marketing;
+
   return (
     <div className="relative min-h-full bg-black text-white">
       <div
@@ -90,26 +23,28 @@ export default function Home() {
                 SM
               </span>
             </div>
-            <span className="text-sm font-medium tracking-tight">StockMemo</span>
+            <span className="text-sm font-medium tracking-tight">
+              {ja.common.brand}
+            </span>
           </div>
           <nav className="hidden items-center gap-8 sm:flex">
             <a
               href="#features"
               className="text-sm text-white/50 transition-colors hover:text-white"
             >
-              Product
+              {t.nav.product}
             </a>
             <a
               href="#proof"
               className="text-sm text-white/50 transition-colors hover:text-white"
             >
-              Customers
+              {t.nav.customers}
             </a>
             <a
               href="#waitlist"
               className="rounded-full border border-white/15 px-4 py-2 text-sm text-white/80 transition-colors hover:border-white/30 hover:text-white"
             >
-              無料で先行登録
+              {t.nav.waitlist}
             </a>
           </nav>
         </header>
@@ -119,24 +54,22 @@ export default function Home() {
             <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
               <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/50">
-              先行登録受付中
+                {t.hero.badge}
               </span>
             </div>
 
             <h1 className="max-w-4xl text-4xl font-medium leading-[1.08] tracking-[-0.04em] text-white sm:text-6xl sm:leading-[1.02] lg:text-7xl">
-            決算資料を読む時間を、60秒に。
+              {t.hero.title}
             </h1>
 
             <p className="mt-6 max-w-xl text-lg leading-8 text-white/55 sm:text-xl">
-            長い決算資料をAIが要約。
-            投資判断に必要なポイントだけを瞬時に把握。
+              {t.hero.subtitle}
             </p>
 
             <div id="waitlist" className="mt-10 w-full max-w-md">
               <WaitlistForm source="hero" variant="hero" />
             </div>
 
-            {/* Product preview */}
             <div className="relative mt-20 w-full max-w-4xl">
               <div className="absolute inset-x-8 -bottom-6 h-24 rounded-full bg-white/[0.06] blur-3xl" />
               <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] shadow-[0_32px_80px_rgba(0,0,0,0.5)]">
@@ -147,36 +80,40 @@ export default function Home() {
                     <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
                   </div>
                   <span className="ml-3 font-mono text-[11px] text-white/30">
-                    stockmemo.app / AAPL Q1 FY26
+                    {t.preview.windowTitle}
                   </span>
                 </div>
                 <div className="grid gap-px bg-white/10 sm:grid-cols-3">
                   <div className="bg-black p-6 text-left sm:col-span-2">
                     <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/35">
-                      Summary
+                      {t.preview.summaryLabel}
                     </p>
                     <p className="mt-3 text-sm leading-7 text-white/70">
-                      Revenue beat by 2.1%. Services growth accelerated.
-                      Management raised full-year guidance. Margin expansion
-                      driven by mix shift — key watch item for next quarter.
+                      {t.preview.summaryText}
                     </p>
                   </div>
                   <div className="bg-black p-6 text-left">
                     <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/35">
-                      Key metrics
+                      {t.preview.metricsLabel}
                     </p>
                     <dl className="mt-3 space-y-2">
                       <div className="flex justify-between text-sm">
-                        <dt className="text-white/40">Revenue</dt>
-                        <dd className="font-mono text-emerald-400">+8.2%</dd>
+                        <dt className="text-white/40">{t.preview.revenue}</dt>
+                        <dd className="font-mono text-emerald-400">
+                          {t.preview.revenueValue}
+                        </dd>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <dt className="text-white/40">EPS</dt>
-                        <dd className="font-mono text-emerald-400">Beat</dd>
+                        <dt className="text-white/40">{t.preview.eps}</dt>
+                        <dd className="font-mono text-emerald-400">
+                          {t.preview.epsValue}
+                        </dd>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <dt className="text-white/40">Guidance</dt>
-                        <dd className="font-mono text-white/70">Raised</dd>
+                        <dt className="text-white/40">{t.preview.guidance}</dt>
+                        <dd className="font-mono text-white/70">
+                          {t.preview.guidanceValue}
+                        </dd>
                       </div>
                     </dl>
                   </div>
@@ -185,16 +122,12 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Social proof strip */}
-          <section
-            id="proof"
-            className="border-y border-white/10 py-14"
-          >
+          <section id="proof" className="border-y border-white/10 py-14">
             <p className="text-center font-mono text-[11px] uppercase tracking-[0.22em] text-white/40">
-              Trusted by serious investors
+              {t.proof.label}
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-              {trustedBy.map((label) => (
+              {t.proof.audiences.map((label) => (
                 <span
                   key={label}
                   className="text-sm font-medium tracking-tight text-white/25 transition-colors hover:text-white/45"
@@ -205,10 +138,9 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Value props */}
           <section className="py-24">
             <div className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-3">
-              {valueProps.map((prop) => (
+              {t.valueProps.map((prop) => (
                 <article
                   key={prop.label}
                   className="bg-black px-8 py-10 text-center sm:px-6 sm:py-12"
@@ -227,25 +159,24 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Testimonials */}
           <section className="border-t border-white/10 py-24">
             <div className="mb-14 text-center">
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-white/45">
-                From the desk
+                {t.testimonials.label}
               </p>
               <h2 className="mt-4 text-2xl font-medium tracking-tight text-white sm:text-3xl">
-                Read less. Understand more.
+                {t.testimonials.title}
               </h2>
             </div>
 
             <div className="grid gap-6 sm:grid-cols-3">
-              {testimonials.map((item) => (
+              {t.testimonials.items.map((item) => (
                 <blockquote
                   key={item.role}
                   className="flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[0.02] p-8"
                 >
                   <p className="text-sm leading-7 text-white/60">
-                    &ldquo;{item.quote}&rdquo;
+                    「{item.quote}」
                   </p>
                   <footer className="mt-8 border-t border-white/10 pt-6">
                     <p className="text-sm font-medium text-white">
@@ -258,23 +189,21 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Features */}
           <section id="features" className="border-t border-white/10 py-24">
             <div className="mb-16 max-w-2xl">
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-white/45">
-                Capabilities
+                {t.features.label}
               </p>
               <h2 className="mt-4 text-2xl font-medium tracking-tight text-white sm:text-3xl">
-                Everything you need after the bell rings.
+                {t.features.title}
               </h2>
               <p className="mt-4 text-sm leading-7 text-white/45">
-                Save hours every earnings season with a workflow designed for
-                speed, clarity, and conviction.
+                {t.features.subtitle}
               </p>
             </div>
 
             <div className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2">
-              {features.map((feature) => (
+              {t.features.items.map((feature) => (
                 <article
                   key={feature.title}
                   className="group bg-black p-8 transition-colors hover:bg-white/[0.02] sm:p-10"
@@ -291,7 +220,6 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Final CTA */}
           <section className="border-t border-white/10 py-24">
             <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] px-8 py-16 text-center sm:px-16 sm:py-20">
               <div
@@ -300,14 +228,13 @@ export default function Home() {
               />
               <div className="relative">
                 <p className="font-mono text-xs uppercase tracking-[0.2em] text-white/45">
-                  Trusted by serious investors
+                  {t.cta.label}
                 </p>
                 <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-medium tracking-tight text-white sm:text-4xl">
-                  Stop reading 80-page filings. Start understanding them.
+                  {t.cta.title}
                 </h2>
                 <p className="mx-auto mt-4 max-w-lg text-sm leading-7 text-white/45">
-                  Join the waitlist and be first when we open access for the
-                  next earnings season.
+                  {t.cta.subtitle}
                 </p>
                 <WaitlistForm source="cta" variant="cta" />
               </div>
@@ -321,12 +248,10 @@ export default function Home() {
               <span className="font-mono text-[10px] font-medium">SM</span>
             </div>
             <span className="text-sm text-white/40">
-              © {new Date().getFullYear()} StockMemo
+              © {new Date().getFullYear()} {ja.common.brand}
             </span>
           </div>
-          <p className="text-sm text-white/30">
-            Read less. Understand more.
-          </p>
+          <p className="text-sm text-white/30">{t.footer.tagline}</p>
         </footer>
       </div>
     </div>

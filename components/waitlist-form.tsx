@@ -1,5 +1,6 @@
 "use client";
 
+import { ja } from "@/lib/i18n/ja";
 import { FormEvent, useState } from "react";
 
 type WaitlistFormProps = {
@@ -13,6 +14,7 @@ export function WaitlistForm({
   source = "hero",
   variant = "hero",
 }: WaitlistFormProps) {
+  const t = ja.waitlist;
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<FormStatus>("idle");
   const [message, setMessage] = useState("");
@@ -33,16 +35,16 @@ export function WaitlistForm({
 
       if (!response.ok) {
         setStatus("error");
-        setMessage(data.error ?? "Something went wrong. Please try again.");
+        setMessage(data.error ?? t.errorGeneric);
         return;
       }
 
       setStatus("success");
-      setMessage("You're on the list. We'll be in touch soon.");
+      setMessage(t.success);
       setEmail("");
     } catch {
       setStatus("error");
-      setMessage("Something went wrong. Please try again.");
+      setMessage(t.errorGeneric);
     }
   }
 
@@ -76,7 +78,7 @@ export function WaitlistForm({
         className="flex w-full flex-col gap-3 sm:flex-row"
       >
         <label htmlFor={`waitlist-email-${source}`} className="sr-only">
-          Email address
+          {t.emailLabel}
         </label>
         <input
           id={`waitlist-email-${source}`}
@@ -84,7 +86,7 @@ export function WaitlistForm({
           name="email"
           required
           autoComplete="email"
-          placeholder="you@company.com"
+          placeholder={t.emailPlaceholder}
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           disabled={status === "loading"}
@@ -95,16 +97,14 @@ export function WaitlistForm({
           disabled={status === "loading"}
           className="inline-flex h-12 shrink-0 items-center justify-center rounded-full bg-white px-8 text-sm font-medium text-black shadow-[0_0_40px_rgba(255,255,255,0.12)] transition-all hover:opacity-90 hover:shadow-[0_0_60px_rgba(255,255,255,0.18)] disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {status === "loading" ? "Joining..." : "Join waitlist"}
+          {status === "loading" ? t.submitting : t.submit}
         </button>
       </form>
 
       {status === "error" ? (
         <p className="text-sm text-red-400">{message}</p>
       ) : (
-        <p className="text-sm text-white/35">
-          Early access opening soon. No spam.
-        </p>
+        <p className="text-sm text-white/35">{t.hint}</p>
       )}
     </div>
   );
