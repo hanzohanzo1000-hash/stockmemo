@@ -1,9 +1,13 @@
+import { listStocks } from "@/lib/db/stocks";
+import { isSupabaseConfigured } from "@/lib/supabase/admin";
 import { ja } from "@/lib/i18n/ja";
 
-const popularSymbols = ["AAPL", "MSFT", "NVDA", "GOOGL", "AMZN"];
+const fallbackSymbols = ["AAPL", "MSFT", "NVDA", "GOOGL", "AMZN"];
 
-export default function AppDashboardPage() {
+export default async function AppDashboardPage() {
   const t = ja.platform.dashboard;
+  const configured = isSupabaseConfigured();
+  const stocks = configured ? await listStocks().catch(() => []) : [];
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-16 sm:py-24">
@@ -36,11 +40,38 @@ export default function AppDashboardPage() {
         <h2 className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/40">
           {t.popularLabel}
         </h2>
+
+        {!configured ? (
+          <p className="mt-4 text-center text-sm text-white/35">{t.dbPending}</p>
+        ) : null}
+
+        {configured && stocks.length === 0 ? (
+          <p className="mt-4 text-center text-sm text-white/35">{t.dbEmpty}</p>
+        ) : null}
+
         <ul className="mt-4 flex flex-wrap justify-center gap-3">
-          {popularSymbols.map((symbol) => (
-            <li key={symbol}>
-              <span className="inline-flex rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 font-mono text-sm text-white/60">
-                {symbol}
+          {(stocks.length > 0
+            ? stocks.map((stock) => ({
+                key: stock.id,
+                label: stock.symbol,
+                sublabel: stock.name,
+              }))
+            : fallbackSymbols.map((symbol) => ({
+                key: symbol,
+                label: symbol,
+                sublabel: null,
+              }))
+          ).map((item) => (
+            <li key={item.key}>
+              <span className="inline-flex flex-col items-center rounded-full border border-white/10 bg-white/[0.03] px-4 py-2">
+                <span className="font-mono text-sm text-white/80">
+                  {item.label}
+                </span>
+                {item.sublabel ? (
+                  <span className="mt-0.5 max-w-[120px] truncate text-[10px] text-white/35">
+                    {item.sublabel}
+                  </span>
+                ) : null}
               </span>
             </li>
           ))}

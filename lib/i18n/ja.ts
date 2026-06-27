@@ -143,6 +143,8 @@ export const ja = {
       searchPlaceholder: "AAPL または Apple Inc.",
       searchHint: "検索機能は近日公開",
       popularLabel: "人気銘柄",
+      dbPending: "Supabase 接続後に銘柄一覧を表示します。",
+      dbEmpty: "銘柄データがありません。SQL マイグレーションを実行してください。",
     },
   },
 } as const;
