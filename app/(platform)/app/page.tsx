@@ -1,8 +1,8 @@
+import { StockLinkChip } from "@/components/platform/stock-link-chip";
+import { StockSearch } from "@/components/platform/stock-search";
 import { listStocks } from "@/lib/db/stocks";
 import { isSupabaseConfigured } from "@/lib/supabase/admin";
 import { ja } from "@/lib/i18n/ja";
-
-const fallbackSymbols = ["AAPL", "MSFT", "NVDA", "GOOGL", "AMZN"];
 
 export default async function AppDashboardPage() {
   const t = ja.platform.dashboard;
@@ -21,20 +21,7 @@ export default async function AppDashboardPage() {
         <p className="mt-4 text-sm leading-7 text-white/45">{t.subtitle}</p>
       </div>
 
-      <form className="mt-10" action="#" aria-label={t.searchLabel}>
-        <label htmlFor="stock-search" className="sr-only">
-          {t.searchLabel}
-        </label>
-        <input
-          id="stock-search"
-          type="search"
-          name="q"
-          placeholder={t.searchPlaceholder}
-          disabled
-          className="h-12 w-full rounded-full border border-white/15 bg-white/[0.04] px-5 text-sm text-white placeholder:text-white/30 outline-none"
-        />
-        <p className="mt-3 text-center text-xs text-white/30">{t.searchHint}</p>
-      </form>
+      <StockSearch configured={configured} />
 
       <section className="mt-16">
         <h2 className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/40">
@@ -49,33 +36,15 @@ export default async function AppDashboardPage() {
           <p className="mt-4 text-center text-sm text-white/35">{t.dbEmpty}</p>
         ) : null}
 
-        <ul className="mt-4 flex flex-wrap justify-center gap-3">
-          {(stocks.length > 0
-            ? stocks.map((stock) => ({
-                key: stock.id,
-                label: stock.symbol,
-                sublabel: stock.name,
-              }))
-            : fallbackSymbols.map((symbol) => ({
-                key: symbol,
-                label: symbol,
-                sublabel: null,
-              }))
-          ).map((item) => (
-            <li key={item.key}>
-              <span className="inline-flex flex-col items-center rounded-full border border-white/10 bg-white/[0.03] px-4 py-2">
-                <span className="font-mono text-sm text-white/80">
-                  {item.label}
-                </span>
-                {item.sublabel ? (
-                  <span className="mt-0.5 max-w-[120px] truncate text-[10px] text-white/35">
-                    {item.sublabel}
-                  </span>
-                ) : null}
-              </span>
-            </li>
-          ))}
-        </ul>
+        {stocks.length > 0 ? (
+          <ul className="mt-4 flex flex-wrap justify-center gap-3">
+            {stocks.map((stock) => (
+              <li key={stock.id}>
+                <StockLinkChip stock={stock} />
+              </li>
+            ))}
+          </ul>
+        ) : null}
       </section>
     </div>
   );

@@ -17,6 +17,7 @@ export const ja = {
     nav: {
       product: "機能",
       customers: "利用者",
+      research: "銘柄検索",
       waitlist: "無料で先行登録",
     },
     hero: {
@@ -24,6 +25,7 @@ export const ja = {
       title: "決算資料を読む時間を、60秒に。",
       subtitle:
         "長い決算資料をAIが要約。投資判断に必要なポイントだけを瞬時に把握。",
+      openApp: "銘柄を検索する",
     },
     preview: {
       windowTitle: "stockmemo.io / AAPL Q1 FY26",
@@ -138,13 +140,28 @@ export const ja = {
     dashboard: {
       label: "リサーチプラットフォーム",
       title: "銘柄を検索",
-      subtitle: "ティッカーまたは社名で検索。AI要約・チャート・ニュースは近日公開。",
+      subtitle: "ティッカーまたは社名で検索。銘柄ページで詳細を確認できます。",
       searchLabel: "銘柄検索",
       searchPlaceholder: "AAPL または Apple Inc.",
-      searchHint: "検索機能は近日公開",
+      searchHint: "2文字以上で候補を表示",
+      searching: "検索中...",
+      noResults: "該当する銘柄が見つかりません。",
+      searchError: "検索に失敗しました。",
+      dbNotConfigured: "Supabase が未設定のため検索できません。",
+      resultsLabel: "検索結果",
       popularLabel: "人気銘柄",
       dbPending: "Supabase 接続後に銘柄一覧を表示します。",
       dbEmpty: "銘柄データがありません。SQL マイグレーションを実行してください。",
+    },
+    stock: {
+      comingSoon: "チャート・ニュース・AI要約は Phase 1d 以降で追加します。",
+      notFound: "銘柄が見つかりません。",
+    },
+  },
+  api: {
+    stocks: {
+      notConfigured: "Supabase が設定されていません。",
+      fetchFailed: "銘柄の取得に失敗しました。",
     },
   },
 } as const;

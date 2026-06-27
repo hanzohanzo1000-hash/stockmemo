@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { WaitlistForm } from "@/components/waitlist-form";
 import { ja } from "@/lib/i18n/ja";
 
@@ -40,6 +41,12 @@ export default function Home() {
             >
               {t.nav.customers}
             </a>
+            <Link
+              href="/app"
+              className="text-sm text-white/50 transition-colors hover:text-white"
+            >
+              {t.nav.research}
+            </Link>
             <a
               href="#waitlist"
               className="rounded-full border border-white/15 px-4 py-2 text-sm text-white/80 transition-colors hover:border-white/30 hover:text-white"
@@ -65,6 +72,13 @@ export default function Home() {
             <p className="mt-6 max-w-xl text-lg leading-8 text-white/55 sm:text-xl">
               {t.hero.subtitle}
             </p>
+
+            <Link
+              href="/app"
+              className="mt-8 inline-flex h-12 items-center justify-center rounded-full bg-white px-8 text-sm font-medium text-black shadow-[0_0_40px_rgba(255,255,255,0.12)] transition-all hover:opacity-90 hover:shadow-[0_0_60px_rgba(255,255,255,0.18)]"
+            >
+              {t.hero.openApp}
+            </Link>
 
             <div id="waitlist" className="mt-10 w-full max-w-md">
               <WaitlistForm source="hero" variant="hero" />
