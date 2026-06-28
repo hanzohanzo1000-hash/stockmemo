@@ -154,7 +154,14 @@ export const ja = {
       dbEmpty: "銘柄データがありません。SQL マイグレーションを実行してください。",
     },
     stock: {
-      comingSoon: "チャート・ニュース・AI要約は Phase 1d 以降で追加します。",
+      backToSearch: "銘柄検索に戻る",
+      priceLabel: "現在株価",
+      chartLabel: "株価チャート",
+      loading: "株価データを読み込み中...",
+      quoteError: "株価の取得に失敗しました。",
+      chartError: "チャートの取得に失敗しました。",
+      chartEmpty: "チャートデータがありません。",
+      comingSoon: "ニュースとAI要約は Phase 1e 以降で追加します。",
       notFound: "銘柄が見つかりません。",
     },
   },
@@ -162,6 +169,11 @@ export const ja = {
     stocks: {
       notConfigured: "Supabase が設定されていません。",
       fetchFailed: "銘柄の取得に失敗しました。",
+    },
+    finnhub: {
+      notConfigured: "Finnhub API が設定されていません。",
+      quoteFailed: "株価の取得に失敗しました。",
+      chartFailed: "チャートの取得に失敗しました。",
     },
   },
 } as const;

@@ -1,3 +1,4 @@
+import { StockChartPanel } from "@/components/platform/stock-chart-panel";
 import { getStockBySymbol } from "@/lib/db/stocks";
 import { isSupabaseConfigured } from "@/lib/supabase/admin";
 import { ja } from "@/lib/i18n/ja";
@@ -10,7 +11,6 @@ type StockPageProps = {
 
 export default async function StockPage({ params }: StockPageProps) {
   const { symbol } = await params;
-  const t = ja.platform.stock;
 
   if (!isSupabaseConfigured()) {
     notFound();
@@ -28,7 +28,7 @@ export default async function StockPage({ params }: StockPageProps) {
         href="/app"
         className="text-sm text-white/45 transition-colors hover:text-white"
       >
-        ← 銘柄検索に戻る
+        ← {ja.platform.stock.backToSearch}
       </Link>
 
       <div className="mt-8">
@@ -41,9 +41,7 @@ export default async function StockPage({ params }: StockPageProps) {
         <p className="mt-2 text-lg text-white/55">{stock.name}</p>
       </div>
 
-      <div className="mt-12 rounded-2xl border border-white/10 bg-white/[0.02] p-6">
-        <p className="text-sm leading-7 text-white/45">{t.comingSoon}</p>
-      </div>
+      <StockChartPanel symbol={stock.symbol} />
     </div>
   );
 }
