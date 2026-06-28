@@ -43,3 +43,24 @@ export type StockChart = {
   range: ChartRange;
   points: ChartPoint[];
 };
+
+export type FinnhubNewsItem = {
+  category: string;
+  datetime: number;
+  headline: string;
+  id: number;
+  image: string;
+  related: string;
+  source: string;
+  summary: string;
+  url: string;
+};
+
+export type StockNewsArticle = {
+  id: string;
+  title: string;
+  url: string;
+  source: string;
+  publishedAt: number;
+  summary: string;
+};

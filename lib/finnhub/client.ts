@@ -1,10 +1,13 @@
 import { fetchStockChartFromYahoo } from "@/lib/market/yahoo-chart";
+import { fetchStockNewsFromYahoo } from "@/lib/market/yahoo-news";
 import { getRangeWindow, isChartRange } from "@/lib/finnhub/ranges";
 import type {
   ChartRange,
   FinnhubCandleResponse,
+  FinnhubNewsItem,
   FinnhubQuote,
   StockChart,
+  StockNewsArticle,
   StockQuote,
 } from "@/lib/finnhub/types";
 
@@ -134,4 +137,60 @@ export function parseChartRangeParam(value: string | null): ChartRange {
   }
 
   return "1M";
+}
+
+function getNewsDateRange(): { from: string; to: string } {
+  const to = new Date();
+  const from = new Date();
+  from.setDate(from.getDate() - 30);
+
+  return {
+    from: from.toISOString().slice(0, 10),
+    to: to.toISOString().slice(0, 10),
+  };
+}
+
+async function fetchStockNewsFromFinnhub(
+  symbol: string,
+): Promise<StockNewsArticle[]> {
+  const normalized = assertValidSymbol(symbol);
+  const { from, to } = getNewsDateRange();
+
+  const items = await finnhubFetch<FinnhubNewsItem[]>("/company-news", {
+    symbol: normalized,
+    from,
+    to,
+  });
+
+  return (items ?? []).slice(0, 10).map((item) => ({
+    id: String(item.id),
+    title: item.headline,
+    url: item.url,
+    source: item.source,
+    publishedAt: item.datetime,
+    summary: item.summary,
+  }));
+}
+
+export async function fetchStockNews(symbol: string): Promise<StockNewsArticle[]> {
+  const normalized = assertValidSymbol(symbol);
+
+  try {
+    const articles = await fetchStockNewsFromFinnhub(normalized);
+
+    if (articles.length > 0) {
+      return articles;
+    }
+
+    throw new Error("Finnhub returned no news articles.");
+  } catch (finnhubError) {
+    console.warn("Finnhub news unavailable, falling back to Yahoo:", finnhubError);
+
+    try {
+      return await fetchStockNewsFromYahoo(normalized);
+    } catch (yahooError) {
+      console.error("Yahoo news fallback failed:", yahooError);
+      throw yahooError;
+    }
+  }
 }

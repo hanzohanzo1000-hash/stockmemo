@@ -1,4 +1,5 @@
 import { StockChartPanel } from "@/components/platform/stock-chart-panel";
+import { StockNewsPanel } from "@/components/platform/stock-news-panel";
 import { getStockBySymbol } from "@/lib/db/stocks";
 import { isSupabaseConfigured } from "@/lib/supabase/admin";
 import { ja } from "@/lib/i18n/ja";
@@ -42,6 +43,13 @@ export default async function StockPage({ params }: StockPageProps) {
       </div>
 
       <StockChartPanel symbol={stock.symbol} />
+      <StockNewsPanel symbol={stock.symbol} />
+
+      <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.02] p-6">
+        <p className="text-sm leading-7 text-white/45">
+          {ja.platform.stock.aiComingSoon}
+        </p>
+      </div>
     </div>
   );
 }

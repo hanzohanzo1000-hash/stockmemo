@@ -230,10 +230,6 @@ export function StockChartPanel({ symbol }: StockChartPanelProps) {
           <p className="mt-6 text-sm text-white/40">{t.chartEmpty}</p>
         ) : null}
       </div>
-
-      <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-6">
-        <p className="text-sm leading-7 text-white/45">{t.comingSoon}</p>
-      </div>
     </section>
   );
 }
