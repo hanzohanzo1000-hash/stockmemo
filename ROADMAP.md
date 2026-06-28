@@ -19,8 +19,8 @@ UI の大改修は Phase 2（中身が揃ってから）。
 | **1c** | 銘柄検索 UI + `GET /api/stocks` | ✅ |
 | **1d** | 株価・チャート（Finnhub + Yahoo フォールバック） | ✅ |
 | **1e** | 関連ニュース（Finnhub `/company-news` + Yahoo フォールバック） | ✅ |
-| **1f** | AI 要約（Bull / Bear / Key Risks / What to Watch） | 次 |
-| **1g** | 日本株 MVP（主要銘柄 seed、7203 等） | 予定 |
+| **1f** | AI 要約（Bull / Bear / Key Risks / What to Watch） | ✅ |
+| **1g** | 日本株 MVP（主要銘柄 seed、7203 等） | 次 |
 
 ### Phase 1 の API ルート
 
@@ -93,7 +93,7 @@ Phase 1 で quote / chart / news / AI が揃ったあと、参考デザインに
 | 株価 | Finnhub `/quote` | — |
 | チャート | Finnhub `/stock/candle` | Yahoo Finance |
 | ニュース | Finnhub `/company-news` | Yahoo Finance |
-| AI 要約 | OpenAI 等（1f で決定） | — |
+| AI 要約 | OpenAI (`gpt-4o-mini`) + Supabase キャッシュ | — |
 
 ---
 
@@ -109,4 +109,4 @@ Phase 1 で quote / chart / news / AI が揃ったあと、参考デザインに
 
 ## 次のアクション
 
-**Phase 1f** — AI 要約 API + 銘柄ページへの表示。完了後 **Phase 2a** でダッシュボード UI に移行。
+**Phase 1g** — 日本株 MVP（主要銘柄 seed）。完了後 **Phase 2a** でダッシュボード UI に移行。
